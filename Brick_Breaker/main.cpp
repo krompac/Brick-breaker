@@ -21,7 +21,7 @@ int main()
 	int diff = 0;
 
 	InitWindow(screenWidth, screenHeight, "Brick Breaker");
-	ToggleFullscreen();
+	DisableCursor();
 
 	while (!WindowShouldClose())
 	{
@@ -36,11 +36,11 @@ int main()
 		diff = GetMouseX() - currX;
 		currX = GetMouseX();
 
-		if (x + 100 + diff <= GetScreenWidth() && diff >= 0 && currX >= x + 100)
+		if (x + 100 + diff <= GetScreenWidth() && diff >= 0)
 		{
 			x += diff;
 		}
-		else if (x + diff >= 0 && diff <= 0 && currX <= x)
+		else if (x + diff >= 0 && diff <= 0)
 		{
 			x += diff;
 		}
