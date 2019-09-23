@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{954DD454-BDA0-468F-A796-6CF8B8D54750}</ProjectGuid>
     <RootNamespace>BrickBreaker</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -122,7 +122,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Clickable_Object.cpp" />
+    <ClCompile Include="Game_Object.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rect_Object.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Clickable_Object.h" />
+    <ClInclude Include="Game_Object.h" />
+    <ClInclude Include="Rect_Object.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
