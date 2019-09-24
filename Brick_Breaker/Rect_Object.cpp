@@ -1,7 +1,5 @@
 #include "Rect_Object.h"
 
-
-
 Rect_Object::Rect_Object()
 {
 }
@@ -17,7 +15,13 @@ Rect_Object::Rect_Object(int x, int y, int width, int height, Color color) : Gam
 
 void Rect_Object::SetXpos(int value)
 {
+	Game_Object::SetXpos(value);
 	rect->x = value;
+}
+
+Rectangle *Rect_Object::getRect()
+{
+	return rect;
 }
 
 void Rect_Object::DrawMe()

@@ -13,7 +13,6 @@ Pad::Pad(int x, int y, int width, int height, Color color) : Rect_Object(x, y, w
 void Pad::Move()
 {
 	xPosDifference = GetMouseX() - currentMouseX;
-	//diff *= 2;
 	currentMouseX = GetMouseX();
 
 	if (x + 100 + xPosDifference <= (GetScreenWidth() - 50) && xPosDifference >= 0)

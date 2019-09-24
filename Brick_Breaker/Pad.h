@@ -4,16 +4,16 @@
 
 class Pad : public Rect_Object, public Moveable_Object 
 {
-private:
-	float xPosDifference;
-	int currentMouseX;
+	private:
+		float xPosDifference;
+		int currentMouseX;
 
-public:
-	Pad();
-	Pad(int x, int y, int width, int height, Color color);
+	public:
+		Pad();
+		Pad(int x, int y, int width, int height, Color color);
 
-	void Move();
+		void Move();
 
-	~Pad();
+		~Pad();
 };
 
