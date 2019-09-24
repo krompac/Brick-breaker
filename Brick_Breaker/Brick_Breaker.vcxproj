@@ -125,11 +125,15 @@
     <ClCompile Include="Clickable_Object.cpp" />
     <ClCompile Include="Game_Object.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Moveable_Object.cpp" />
+    <ClCompile Include="Pad.cpp" />
     <ClCompile Include="Rect_Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clickable_Object.h" />
     <ClInclude Include="Game_Object.h" />
+    <ClInclude Include="Moveable_Object.h" />
+    <ClInclude Include="Pad.h" />
     <ClInclude Include="Rect_Object.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

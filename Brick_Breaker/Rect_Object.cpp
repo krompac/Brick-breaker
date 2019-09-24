@@ -27,5 +27,6 @@ void Rect_Object::DrawMe()
 
 Rect_Object::~Rect_Object()
 {
+	std::cout << "Rect obj deleted" << std::endl;
 	delete rect;
 }

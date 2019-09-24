@@ -3,7 +3,7 @@
 #include <chrono>
 
 #include "raylib.h"
-#include "Rect_Object.h"
+#include "Pad.h"
 
 void sleep()
 {
@@ -15,10 +15,10 @@ int main()
 	const int screenWidth = 800;
 	const int screenHeight = 450;
 	int x = 0;
-	auto test = Rect_Object(x, 200, 100, 50, BLACK);
+	auto test = new Pad(x, 430, 100, 20, BLACK);
 
-	int currX = GetMouseX();
-	int diff = 0;
+	float currX = GetMouseX();
+	float diff = 0;
 
 	InitWindow(screenWidth, screenHeight, "Brick Breaker");
 	DisableCursor();
@@ -28,22 +28,10 @@ int main()
 		BeginDrawing();
 
 		ClearBackground(RAYWHITE);
-		test.SetXpos(x);
-		test.DrawMe();
+		test->DrawMe();
+		test->Move();
 
 		EndDrawing();
-
-		diff = GetMouseX() - currX;
-		currX = GetMouseX();
-
-		if (x + 100 + diff <= GetScreenWidth() && diff >= 0)
-		{
-			x += diff;
-		}
-		else if (x + diff >= 0 && diff <= 0)
-		{
-			x += diff;
-		}
 
 		sleep();
 
@@ -54,6 +42,10 @@ int main()
 	}
 
 	CloseWindow();
+
+	delete test;
+
+	system("Pause");
 
 	return 0;
 }
