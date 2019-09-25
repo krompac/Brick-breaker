@@ -19,10 +19,17 @@ Ball::Ball(int x, int y, float radius, Color color) : Game_Object(x, y, radius, 
 
 	goingRight = true;
 	goingUp = false;
+
+	directionChanged = false;
 }
 
 void Ball::Move()
 {
+	/*if (IsMouseButtonDown(0))
+	{
+		center = GetMousePosition();
+	}*/
+
 	if (goingRight)
 	{
 		center.x += speed.x;
@@ -70,37 +77,75 @@ bool Ball::CheckColisionWithRect(Rectangle rect)
 {
 	bool returnMe = CheckCollisionCircleRec(center, radius, rect);
 
-	if (returnMe)
+	if (returnMe && !directionChanged)
 	{
-		if (!goingUp && center.y < rect.y && center.y + radius >= rect.y)
-		{
-			std::cout << "GORE" << std::endl;
-			goingUp = true;
-			center.y = rect.y - radius;
-		}
-		else if (goingUp && center.y > rect.y + rect.height && center.y - radius <= rect.y + rect.height)
-		{
-			std::cout << "DOLE" << std::endl;
-			goingUp = false;
-			center.y = rect.y + rect.height + radius;
-		}
-		else if (goingRight && center.x + radius >= rect.x)
-		{
-			std::cout << "LEVO" << std::endl;
-			goingRight = false;
+		int x = center.x;
+		int y = center.y;
+		int rectZ = rect.y + rect.height;
 
-			center.x = rect.x - radius;
+		if (CheckCollisionPointBall(rect.x, rect.y))
+		{
+			goingRight = false;
+			goingUp = true;
 		}
-		else if (!goingRight && center.x - radius <= rect.x + rect.width)
+		else if (CheckCollisionPointBall(rect.x + rect.width, rect.y))
 		{
 			goingRight = true;
-			std::cout << "DESNO" << std::endl;
-
-			center.x = rect.x + rect.width + radius;
+			goingUp = true;
 		}
+		else if (CheckCollisionPointBall(rect.x, rect.y + rect.height))
+		{
+			goingRight = false;
+			goingUp = false;
+		}
+		else if (CheckCollisionPointBall(rect.x + rect.width, rect.y + rect.height))
+		{
+			goingRight = true;
+			goingUp = false;
+		}
+		else if ((int)y > rect.y && y < rectZ)
+		{
+			if (goingRight && center.x + radius >= rect.x)
+			{
+				std::cout << "LEVO" << std::endl;
+				goingRight = false;
+			}
+			else if (!goingRight && center.x - radius <= (rect.x + rect.width))
+			{
+				goingRight = true;
+				std::cout << "DESNO" << std::endl;
+			}
+		}
+		else
+		{
+			if (x >= rect.x && x <= rect.x + rect.width)
+			{
+				if (!goingUp && center.y + radius >= rect.y && center.y + radius < rect.y + rect.height)
+				{
+					std::cout << "GORE" << std::endl;
+					goingUp = true;
+				}
+				else if (goingUp && center.y - radius <= rect.y + rect.height)
+				{
+					std::cout << "DOLE" << std::endl;
+					goingUp = false;
+				}
+			}
+		}
+
+		directionChanged = true;
 	}
 
 	return returnMe;
+}
+
+bool Ball::CheckCollisionPointBall(int x, int y)
+{
+	auto point = Vector2();
+	point.x = x;
+	point.y = y;
+
+	return CheckCollisionPointCircle(point, center, radius);
 }
 
 void Ball::DrawMe()
@@ -123,6 +168,8 @@ void Ball::CheckCollisionWithPad(Pad *pad)
 
 		speed.x = abs(collision) / (rect.width / 10);
 		speed.y = startingBallSpeed + 1 - (speed.x / startingBallSpeed);
+		speed.x = (int)speed.x;
+		speed.y = (int)speed.y;
 
 		center.y = rect.y - radius;
 	}
@@ -130,13 +177,19 @@ void Ball::CheckCollisionWithPad(Pad *pad)
 
 void Ball::CheckCollisionWithBricks(std::vector<Brick*>& rects)
 {
+	auto destroyCounter = 0;
+	directionChanged = false;
 	for (int i = 0; i < rects.size(); i++)
 	{
 		if (!rects[i]->IsDisabled() && CheckColisionWithRect(*(rects[i]->getRect())))
 		{
 			rects[i]->DestroyMe();
+			destroyCounter++;
 		}
 	}
+
+	if (destroyCounter > 0)
+	std::cout << "DESTROY COUNTER: " << destroyCounter << std::endl;
 }
 
 Ball::~Ball()

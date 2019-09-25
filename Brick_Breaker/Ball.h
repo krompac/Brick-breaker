@@ -19,7 +19,10 @@ class Ball : public Game_Object, public Moveable_Object
 		bool goingRight;
 		bool goingUp;
 
+		bool directionChanged;
+
 		bool CheckColisionWithRect(Rectangle rect);
+		bool CheckCollisionPointBall(int x, int y);
 
 	public:
 		Ball();

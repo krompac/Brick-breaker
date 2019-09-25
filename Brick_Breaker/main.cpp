@@ -35,6 +35,8 @@ int main()
 			yPos += 26;
 		}
 	}
+
+	bool pause = false;
 	
 	InitWindow(screenWidth, screenHeight, "Brick Breaker");
 	DisableCursor();
@@ -46,12 +48,22 @@ int main()
 		ClearBackground(RAYWHITE);
 		DrawRectangle(0, 0, 50, screenHeight, GRAY);
 		DrawRectangle(screenWidth - 50, 0, 50, screenHeight, GRAY);
+		
 
-		pad->DrawMe();
-		pad->Move();
+		if (pause == false)
+		{
+			pad->Move();
+			ball->Move();
+		}
+
 
 		ball->DrawMe();
-		ball->Move();
+		pad->DrawMe();
+
+		if (IsKeyPressed(KEY_P))
+		{
+			pause = !pause;
+		}
 
 		for (auto brick : bricks)
 		{
