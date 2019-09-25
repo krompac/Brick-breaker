@@ -16,7 +16,7 @@ int main()
 	const int screenWidth = 800;
 	const int screenHeight = 450;
 	auto pad = new Pad(0, 430, 100, 20, BLACK);
-	auto ball = new Ball(50, 250, 10, ORANGE);
+	auto ball = new Ball(707, 40, 5, ORANGE);
 
 	std::vector<Brick*> bricks;
 

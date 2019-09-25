@@ -8,25 +8,29 @@
 
 class Ball : public Game_Object, public Moveable_Object
 {
-private:
-	Vector2 center;
-	float radius;
+	private:
+		Vector2 center;
+		float radius;
 
-	Vector2 moveDirection;
-	bool isReleased;
+		int startingBallSpeed;
+		Vector2 speed;
 
-	bool CheckColisionWithRect(Rectangle rect);
+		bool isReleased;
+		bool goingRight;
+		bool goingUp;
 
-public:
-	Ball();
-	Ball(int x, int y, float radius, Color color);
+		bool CheckColisionWithRect(Rectangle rect);
 
-	void Move();
-	void DrawMe();
+	public:
+		Ball();
+		Ball(int x, int y, float radius, Color color);
 
-	void CheckCollisionWithPad(Pad *pad);
-	void CheckCollisionWithBricks(std::vector<Brick*> &rects);
+		void Move();
+		void DrawMe();
 
-	~Ball();
+		void CheckCollisionWithPad(Pad *pad);
+		void CheckCollisionWithBricks(std::vector<Brick*> &bricks);
+
+		~Ball();
 };
 
