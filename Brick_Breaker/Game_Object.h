@@ -1,7 +1,8 @@
 #pragma once
 #include "raylib.h"
+#include "Drawable_Object.h"
 
-class Game_Object
+class Game_Object : Drawable_Object
 {
 	protected:
 		int x;

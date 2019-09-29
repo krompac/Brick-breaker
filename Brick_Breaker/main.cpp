@@ -3,8 +3,7 @@
 #include <chrono>
 
 #include "raylib.h"
-#include "Pad.h"
-#include "Ball.h"
+#include "Gameplay_Window.h"
 
 void sleep()
 {
@@ -15,64 +14,20 @@ int main()
 {
 	const int screenWidth = 800;
 	const int screenHeight = 450;
-	auto pad = new Pad(0, 430, 100, 20, BLACK);
-	auto ball = new Ball(707, 40, 5, ORANGE);
-
-	std::vector<Brick*> bricks;
-
-	int xPos = 75;
-	int yPos = 30;
-	int diff = 52;
-
-	for (int i = 0; i < 60; i++)
-	{
-		bricks.push_back(new Brick(xPos, yPos, 51, 25, BLACK));
-		xPos += diff;
-
-		if (bricks.size() % 12 == 0)
-		{
-			xPos = 75;
-			yPos += 26;
-		}
-	}
-
-	bool pause = false;
 	
 	InitWindow(screenWidth, screenHeight, "Brick Breaker");
 	DisableCursor();
+
+	auto gameplay = new Gameplay_Window();
 
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
 
 		ClearBackground(RAYWHITE);
-		DrawRectangle(0, 0, 50, screenHeight, GRAY);
-		DrawRectangle(screenWidth - 50, 0, 50, screenHeight, GRAY);
+
+		gameplay->HandleMe();
 		
-
-		if (pause == false)
-		{
-			pad->Move();
-			ball->Move();
-		}
-
-
-		ball->DrawMe();
-		pad->DrawMe();
-
-		if (IsKeyPressed(KEY_P))
-		{
-			pause = !pause;
-		}
-
-		for (auto brick : bricks)
-		{
-			brick->DrawMe();
-		}
-
-		ball->CheckCollisionWithPad(pad);
-		ball->CheckCollisionWithBricks(bricks);
-
 		EndDrawing();
 
 		sleep();
@@ -84,14 +39,6 @@ int main()
 	}
 
 	CloseWindow();
-
-	delete ball;
-	delete pad;
-
-	for (auto brick : bricks)
-	{
-		delete brick;
-	}
 
 	system("Pause");
 
