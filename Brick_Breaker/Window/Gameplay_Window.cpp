@@ -1,6 +1,5 @@
 #include "Gameplay_Window.h"
 
-
 Gameplay_Window::Gameplay_Window()
 {
 	pause = false;
