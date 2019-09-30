@@ -51,8 +51,6 @@ void Gameplay_Window::DrawMe()
 
 void Gameplay_Window::HandleMe()
 {
-	this->DrawMe();
-
 	if (IsKeyPressed(KEY_P))
 	{
 		pause = !pause;

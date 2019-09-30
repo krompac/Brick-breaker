@@ -20,12 +20,11 @@ class Gameplay_Window : public Window
 
 		bool pause;
 
-		void DrawMe();
-
 	public:
 		Gameplay_Window();
 		~Gameplay_Window();
 	
 		void HandleMe();
+		void DrawMe();
 };
 

@@ -4,13 +4,11 @@
 
 class Window : public Drawable_Object
 {
-	protected:
-		virtual void DrawMe() = 0;
-
 	public:
 		Window();
 		~Window();
 		
 		virtual void HandleMe() = 0;
+		virtual void DrawMe() = 0;
 };
 

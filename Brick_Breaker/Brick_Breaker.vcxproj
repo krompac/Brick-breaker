@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Window;$(ProjectDir)UI_Elements;$(ProjectDir)Options;$(ProjectDir)Gameplay;$(ProjectDir)Base classes;$(ProjectDir)Raylib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Enums;$(ProjectDir)Window;$(ProjectDir)UI_Elements;$(ProjectDir)Options;$(ProjectDir)Gameplay;$(ProjectDir)Base classes;$(ProjectDir)Raylib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GRAPHICS_API_OPENGL_33;PLATFORM_DESKTOP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
@@ -122,12 +122,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Gameplay\Ball.cpp" />
     <ClCompile Include="Gameplay\Brick.cpp" />
     <ClCompile Include="Base classes\Clickable_Object.cpp" />
     <ClCompile Include="Base classes\Drawable_Object.cpp" />
+    <ClCompile Include="Window\Menu_Window.cpp" />
+    <ClCompile Include="UI_Elements\Text.cpp" />
     <ClCompile Include="Window\Gameplay_Window.cpp" />
-    <ClCompile Include="Gameplay\Game_Object.cpp" />
+    <ClCompile Include="Base classes\Game_Object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Base classes\Moveable_Object.cpp" />
     <ClCompile Include="Gameplay\Pad.cpp" />
@@ -135,16 +138,22 @@
     <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Gameplay\Ball.h" />
     <ClInclude Include="Gameplay\Brick.h" />
     <ClInclude Include="Base classes\Clickable_Object.h" />
     <ClInclude Include="Base classes\Drawable_Object.h" />
+    <ClInclude Include="Enums\Current_Window.h" />
+    <ClInclude Include="Window\Menu_Window.h" />
+    <ClInclude Include="UI_Elements\Text.h" />
     <ClInclude Include="Window\Gameplay_Window.h" />
-    <ClInclude Include="Gameplay\Game_Object.h" />
+    <ClInclude Include="Base classes\Game_Object.h" />
     <ClInclude Include="Base classes\Moveable_Object.h" />
     <ClInclude Include="Gameplay\Pad.h" />
     <ClInclude Include="Gameplay\Rect_Object.h" />
-    <ClInclude Include="Window\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="raylib.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
