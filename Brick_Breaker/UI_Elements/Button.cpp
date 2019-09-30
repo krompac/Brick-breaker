@@ -4,7 +4,7 @@ Button::Button()
 {
 }
 
-Button::Button(int x, int y, int width, int heigth, Color color, const char *text, Nekaj func) : Rect_Object(x, y, width, heigth, color)
+Button::Button(int x, int y, int width, int heigth, Color color, const char *text, Function_Pointer func) : Rect_Object(x, y, width, heigth, color)
 {
 	auto fontSize = height / 2;
 	auto textSize = MeasureText(text, fontSize);
@@ -19,7 +19,7 @@ Button::Button(int x, int y, int width, int heigth, Color color, const char *tex
 
 	this->text = new Text(x + textIndention, y + (heigth / 3), fontSize, BLACK, text);
 
-	this->func = func;
+	this->invokeFunction = func;
 }
 
 void Button::DrawMe()
@@ -34,7 +34,7 @@ bool Button::CheckIfClicked()
 
 	if (returnMe)
 	{
-		func();
+		invokeFunction();
 	}
 
 	return returnMe;

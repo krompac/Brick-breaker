@@ -33,7 +33,7 @@ int main()
 	auto menu = new Menu_Window();
 	Color color = RED;
 	const char *text = "BUTTON";
-	auto nekaj = new Button(400, 400, 100, 50, color, text, print);
+	auto button = new Button(400, 400, 100, 50, color, text, print);
 
 	active = gameplay;
 
@@ -45,8 +45,8 @@ int main()
 
 		active->DrawMe();
 		active->HandleMe();
-		nekaj->DrawMe();
-		nekaj->CheckIfClicked();
+		button->DrawMe();
+		button->CheckIfClicked();
 		
 		EndDrawing();
 
@@ -60,7 +60,7 @@ int main()
 
 	CloseWindow();
 
-	delete nekaj;
+	delete button;
 	delete menu;
 	delete gameplay;
 

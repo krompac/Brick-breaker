@@ -122,7 +122,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="UI_Elements\Button.cpp" />
     <ClCompile Include="Gameplay\Ball.cpp" />
     <ClCompile Include="Gameplay\Brick.cpp" />
     <ClCompile Include="Base classes\Clickable_Object.cpp" />
@@ -138,7 +138,7 @@
     <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="UI_Elements\Button.h" />
     <ClInclude Include="Gameplay\Ball.h" />
     <ClInclude Include="Gameplay\Brick.h" />
     <ClInclude Include="Base classes\Clickable_Object.h" />
@@ -151,6 +151,7 @@
     <ClInclude Include="Base classes\Moveable_Object.h" />
     <ClInclude Include="Gameplay\Pad.h" />
     <ClInclude Include="Gameplay\Rect_Object.h" />
+    <ClInclude Include="Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="raylib.dll" />

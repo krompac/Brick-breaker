@@ -51,10 +51,10 @@
     <ClCompile Include="Window\Menu_Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Base classes\Game_Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Base classes\Game_Object.cpp">
+    <ClCompile Include="UI_Elements\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,9 +83,6 @@
     <ClInclude Include="Window\Gameplay_Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Window\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Enums\Current_Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -95,10 +92,13 @@
     <ClInclude Include="Window\Menu_Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Base classes\Game_Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Base classes\Game_Object.h">
+    <ClInclude Include="UI_Elements\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
