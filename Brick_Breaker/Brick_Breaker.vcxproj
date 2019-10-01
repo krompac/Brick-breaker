@@ -156,6 +156,10 @@
   <ItemGroup>
     <None Include="raylib.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Media\Pictures\breaker.png" />
+    <Image Include="Media\Pictures\brick.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

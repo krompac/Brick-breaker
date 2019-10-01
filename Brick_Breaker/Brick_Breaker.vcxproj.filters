@@ -105,4 +105,12 @@
   <ItemGroup>
     <None Include="raylib.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Media\Pictures\breaker.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Media\Pictures\brick.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
