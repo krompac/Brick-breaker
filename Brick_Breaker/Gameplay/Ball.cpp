@@ -183,7 +183,7 @@ void Ball::CheckCollisionWithBricks(std::vector<Brick*>& rects)
 	{
 		if (!rects[i]->IsDisabled() && CheckColisionWithRect(*(rects[i]->getRect())))
 		{
-			rects[i]->DestroyMe();
+			rects[i]->DisableMe();
 			destroyCounter++;
 		}
 	}

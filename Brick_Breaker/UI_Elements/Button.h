@@ -9,7 +9,7 @@ typedef void(*Function_Pointer)();
 class Button : public Rect_Object, public Clickable_Object
 {
 	private:
-		Function_Pointer invokeFunction;
+		Function_Pointer onClickFunction;
 		Text *text;
 
 	public:
@@ -17,6 +17,7 @@ class Button : public Rect_Object, public Clickable_Object
 		Button(int x, int y, int width, int heigth, Color color, const char *text, Function_Pointer func);
 
 		void DrawMe();
+		void EnableMe();
 		bool CheckIfClicked();
 
 		~Button();

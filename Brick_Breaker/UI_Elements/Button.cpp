@@ -19,22 +19,33 @@ Button::Button(int x, int y, int width, int heigth, Color color, const char *tex
 
 	this->text = new Text(x + textIndention, y + (heigth / 3), fontSize, BLACK, text);
 
-	this->invokeFunction = func;
+	this->onClickFunction = func;
 }
 
 void Button::DrawMe()
 {
-	Rect_Object::DrawMe();
-	text->DrawMe();
+	if (!isDisabled)
+	{
+		Rect_Object::DrawMe();
+		text->DrawMe();
+	}
+}
+
+void Button::EnableMe()
+{
+	if (isDisabled)
+	{
+		isDisabled = false;
+	}
 }
 
 bool Button::CheckIfClicked()
 {
-	auto returnMe = (CheckCollisionPointRec(GetMousePosition(), *rect) && IsMouseButtonPressed(0));
+	auto returnMe = !isDisabled && (CheckCollisionPointRec(GetMousePosition(), *rect) && IsMouseButtonPressed(0));
 
 	if (returnMe)
 	{
-		invokeFunction();
+		onClickFunction();
 	}
 
 	return returnMe;

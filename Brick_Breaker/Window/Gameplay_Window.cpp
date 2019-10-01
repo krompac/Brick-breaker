@@ -10,8 +10,9 @@ Gameplay_Window::Gameplay_Window()
 	int xPos = 75;
 	int yPos = 30;
 	int diff = 52;
+	int brickNumber = 60;
 
-	for (int i = 0; i < 60; i++)
+	for (int i = 0; i < brickNumber; i++)
 	{
 		bricks.push_back(new Brick(xPos, yPos, 51, 25, BLACK));
 		xPos += diff;
@@ -22,6 +23,11 @@ Gameplay_Window::Gameplay_Window()
 			yPos += 26;
 		}
 	}
+}
+
+Gameplay_Window::Gameplay_Window(Function_Pointer toMenu) : Gameplay_Window()
+{
+	this->toMenu = toMenu;
 }
 
 Gameplay_Window::~Gameplay_Window()
@@ -51,18 +57,26 @@ void Gameplay_Window::DrawMe()
 
 void Gameplay_Window::HandleMe()
 {
-	if (IsKeyPressed(KEY_P))
+	if (Brick::GetNumberOfActiveBricks() != 0)
 	{
-		pause = !pause;
+		if (IsKeyPressed(KEY_P))
+		{
+			pause = !pause;
+		}
+
+		if (pause == false)
+		{
+			pad->Move();
+			ball->Move();
+
+			ball->CheckCollisionWithPad(pad);
+			ball->CheckCollisionWithBricks(bricks);
+		}
 	}
 
-	if (pause == false)
+	if (IsKeyDown(KEY_ESCAPE))
 	{
-		pad->Move();
-		ball->Move();
+		toMenu();
+		pause = true;
 	}
-
-
-	ball->CheckCollisionWithPad(pad);
-	ball->CheckCollisionWithBricks(bricks);
 }

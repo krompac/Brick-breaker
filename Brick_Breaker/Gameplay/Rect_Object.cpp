@@ -11,12 +11,19 @@ Rect_Object::Rect_Object(int x, int y, int width, int height, Color color) : Gam
 	rect->y = y;
 	rect->width = width;
 	rect->height = height;
+
+	isDisabled = false;
 }
 
 void Rect_Object::SetXpos(int value)
 {
 	Game_Object::SetXpos(value);
 	rect->x = value;
+}
+
+void Rect_Object::SetYpos(int value)
+{
+	rect->y = value;
 }
 
 Rectangle *Rect_Object::getRect()
@@ -26,8 +33,20 @@ Rectangle *Rect_Object::getRect()
 
 void Rect_Object::DrawMe()
 {
-	DrawRectangleRec(*rect, color);
+	if (!isDisabled)
+	{
+		DrawRectangleRec(*rect, color);
+	}
 }
+
+void Rect_Object::DisableMe()
+{
+	if (!isDisabled)
+	{
+		isDisabled = true;
+	}
+}
+
 
 Rect_Object::~Rect_Object()
 {

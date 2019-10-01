@@ -8,36 +8,41 @@
 #include "Current_Window.h"
 #include "Button.h"
 
+Current_Window window = Lobby;
+
+Window *active = nullptr;
+Gameplay_Window *gameplay = nullptr;
+Menu_Window *menu = nullptr;
+
+bool quit = false;
+
 void sleep()
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(15));
-}
-
-void print()
-{
-	std::cout << "BUTTON CLICK" << std::endl;
 }
 
 int main()
 {
 	const int screenWidth = 800;
 	const int screenHeight = 450;
-	
-	Current_Window window = Lobby;
-
 	InitWindow(screenWidth, screenHeight, "Brick Breaker");
-	//DisableCursor();
+	SetExitKey(KEY_F1);
 
-	Window *active = nullptr;
-	auto gameplay = new Gameplay_Window();
-	auto menu = new Menu_Window();
+	auto toGame = [] { active = gameplay; DisableCursor(); };
+	auto toMenu = [] {active = menu; EnableCursor(); };
+	auto quitGame = [] {quit = true; };
+	auto resume = [] {};
+	
+	gameplay = new Gameplay_Window(toMenu);
+	menu = new Menu_Window(toGame, toMenu, resume, quitGame);
+
 	Color color = RED;
 	const char *text = "BUTTON";
-	auto button = new Button(400, 400, 100, 50, color, text, print);
+	auto button = new Button(400, 400, 100, 50, color, text, sleep);
 
-	active = gameplay;
+	active = menu;
 
-	while (!WindowShouldClose())
+	while (!WindowShouldClose() && !quit)
 	{
 		BeginDrawing();
 
@@ -45,17 +50,10 @@ int main()
 
 		active->DrawMe();
 		active->HandleMe();
-		button->DrawMe();
-		button->CheckIfClicked();
 		
 		EndDrawing();
 
 		sleep();
-
-		if (IsKeyDown(KEY_ESCAPE))
-		{
-			break;
-		}
 	}
 
 	CloseWindow();

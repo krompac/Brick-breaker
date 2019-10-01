@@ -3,17 +3,17 @@
 
 class Brick : public Rect_Object
 {
-private: 
-	bool isDisabled;
+	private: 
+		static int numberOfActiveBricks;
 
-public:
-	Brick();
-	Brick(int x, int y, int width, int height, Color color);
+	public:
+		Brick();
+		Brick(int x, int y, int width, int height, Color color);
 
-	void DestroyMe();
-	void DrawMe();
-	bool IsDisabled();
+		bool IsDisabled();
+		void DisableMe();
 
-	~Brick();
+		static int GetNumberOfActiveBricks();
+
+		~Brick();
 };
-
