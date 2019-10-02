@@ -3,6 +3,7 @@
 
 #include "Window.h"
 #include "Button.h"
+#include "Picture.h"
 
 typedef void(*Function_Pointer)();
 
@@ -16,6 +17,9 @@ class Menu_Window : public Window
 		const char *restart = "RESTART";
 		const char *quit = "QUIT";
 
+		Picture **title;
+		void InitTitlePictures();
+
 	public:
 		Menu_Window();
 		Menu_Window(Function_Pointer playFunction, Function_Pointer resumeFunction, Function_Pointer restartFunction, Function_Pointer quitFunction);
@@ -25,4 +29,3 @@ class Menu_Window : public Window
 		void DrawMe();
 		void HandleMe();
 };
-

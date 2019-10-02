@@ -6,7 +6,7 @@ Button::Button()
 
 Button::Button(int x, int y, int width, int heigth, Color color, const char *text, Function_Pointer func) : Rect_Object(x, y, width, heigth, color)
 {
-	auto fontSize = height / 2;
+	auto fontSize = heigth / 2;
 	auto textSize = MeasureText(text, fontSize);
 
 	while (width - textSize < 10)

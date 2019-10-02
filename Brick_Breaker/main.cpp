@@ -6,7 +6,7 @@
 #include "Gameplay_Window.h"
 #include "Menu_Window.h"
 #include "Button.h"
-
+#include "Picture.h"
 
 Window *active = nullptr;
 Gameplay_Window *gameplay = nullptr;
@@ -19,6 +19,23 @@ void sleep()
 	std::this_thread::sleep_for(std::chrono::milliseconds(15));
 }
 
+void initGameWindows()
+{
+	auto toGame = [] { active = gameplay; DisableCursor(); };
+	auto toMenu = [] {active = menu; EnableCursor(); };
+	auto quitGame = [] {quit = true; };
+	auto resume = [] {};
+
+	gameplay = new Gameplay_Window(toMenu);
+	menu = new Menu_Window(toGame, toMenu, resume, quitGame);
+}
+
+void free()
+{
+	delete gameplay;
+	delete menu;
+}
+
 int main()
 {
 	const int screenWidth = 800;
@@ -26,31 +43,7 @@ int main()
 	InitWindow(screenWidth, screenHeight, "Brick Breaker");
 	SetExitKey(KEY_F1);
 
-	std::string path = GetWorkingDirectory();
-	path.append("/Media/Pictures/");
-
-	auto brickPath = path;
-	brickPath.append("brick.png");
-	
-	auto breakerPath = path;
-	breakerPath.append("breaker.png");
-
-	auto brick = LoadTexture(brickPath.c_str());
-	brick.width = 300;
-	brick.height = 100;
-
-	auto breaker = LoadTexture(breakerPath.c_str());
-	breaker.width = 300;
-	breaker.height = 100;
-
-	auto toGame = [] { active = gameplay; DisableCursor(); };
-	auto toMenu = [] {active = menu; EnableCursor(); };
-	auto quitGame = [] {quit = true; };
-	auto restart = [] {/*TO DO:*/};
-	auto resume = [] { /*TO DO:*/};
-	
-	gameplay = new Gameplay_Window(toMenu);
-	menu = new Menu_Window(toGame, resume, restart, quitGame);
+	initGameWindows();
 	active = menu;
 
 	while (!WindowShouldClose() && !quit)
@@ -58,12 +51,10 @@ int main()
 		BeginDrawing();
 
 		ClearBackground(RAYWHITE);
-		DrawTexture(brick, 100, 100, BLACK);
-		DrawTexture(breaker, 150, 200, BLACK);
-/*
+
 		active->DrawMe();
 		active->HandleMe();
-		*/
+		
 		EndDrawing();
 
 		sleep();
@@ -71,8 +62,7 @@ int main()
 
 	CloseWindow();
 
-	delete menu;
-	delete gameplay;
+	free();
 
 	system("Pause");
 

@@ -4,7 +4,7 @@ Game_Object::Game_Object()
 {
 }
 
-Game_Object::Game_Object(int x, int y, int width, int height, Color color) : x(x), y(y), height(height), width(width), color(color)
+Game_Object::Game_Object(int x, int y, int width, int heigth, Color color) : x(x), y(y), heigth(heigth), width(width), color(color)
 {
 
 }
@@ -28,9 +28,9 @@ void Game_Object::SetWidth(int value)
 	width = value;
 }
 
-void Game_Object::SetHeight(int value)
+void Game_Object::SetHeigth(int value)
 {
-	height = value;
+	heigth = value;
 }
 
 void Game_Object::SetColor(Color color)
