@@ -4,9 +4,8 @@
 #include "Window.h"
 #include "Pad.h"
 #include "Ball.h"
+#include "TypeFuncPointer.h"
 #include "raylib.h"
-
-typedef void(*Function_Pointer)();
 
 class Gameplay_Window : public Window
 {

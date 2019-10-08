@@ -3,8 +3,7 @@
 #include "raylib.h"
 #include "Rect_Object.h"
 #include "Clickable_Object.h"
-
-typedef void(*Function_Pointer)();
+#include "TypeFuncPointer.h"
 
 class Button : public Rect_Object, public Clickable_Object
 {
