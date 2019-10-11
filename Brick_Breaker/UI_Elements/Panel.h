@@ -6,7 +6,7 @@
 #include "Button.h"
 #include "Text.h"
 
-class Panel : Rect_Object, Clickable_Object
+class Panel : public Rect_Object, public Clickable_Object
 {
 	private:
 		std::vector<Button *> buttons;

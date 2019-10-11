@@ -3,6 +3,7 @@
 Gameplay_Window::Gameplay_Window()
 {
 	pause = false;
+	gameWon = false;
 
 	pad = new Pad(0, 430, 100, 20, BLACK);
 	ball = new Ball(707, 40, 5, ORANGE);
@@ -10,7 +11,7 @@ Gameplay_Window::Gameplay_Window()
 	int xPos = 75;
 	int yPos = 30;
 	int diff = 52;
-	int brickNumber = 60;
+	int brickNumber = 4;
 
 	for (int i = 0; i < brickNumber; i++)
 	{
@@ -23,11 +24,30 @@ Gameplay_Window::Gameplay_Window()
 			yPos += 26;
 		}
 	}
+
+	int panelWidth = 300;
+	int panelHeigth = 300;
+	int panelXpos = (SCREEN_WIDTH - panelWidth) / 2;
+	int panelYpos = (SCREEN_HEIGTH - panelHeigth) / 2;
+
+	gameWonPanel = new Panel(panelXpos, panelYpos, panelWidth, panelHeigth, ORANGE);
 }
 
 Gameplay_Window::Gameplay_Window(Function_Pointer toMenu) : Gameplay_Window()
 {
 	this->toMenu = toMenu;
+
+	auto panelRect = gameWonPanel->getRect();
+
+	int buttonWidth = 150;
+	int buttonHeigth = 60;
+	int buttonXpos = (panelRect->width - buttonWidth) / 2 + panelRect->x;
+	int buttonYpos = panelRect->y + panelRect->height - buttonHeigth - 20;
+	const char *buttonText = "OKAY";
+
+	auto toMenuButton = new Button(buttonXpos, buttonYpos, buttonWidth, buttonHeigth, GRAY, buttonText, toMenu);
+
+	gameWonPanel->AddButton(toMenuButton);
 }
 
 Gameplay_Window::~Gameplay_Window()
@@ -39,6 +59,8 @@ Gameplay_Window::~Gameplay_Window()
 	{
 		delete brick;
 	}
+
+	delete gameWonPanel;
 }
 
 void Gameplay_Window::DrawMe()
@@ -53,11 +75,18 @@ void Gameplay_Window::DrawMe()
 	{
 		brick->DrawMe();
 	}
+
+	if (gameWon)
+	{
+		gameWonPanel->DrawMe();
+	}
 }
 
 void Gameplay_Window::HandleMe()
 {
-	if (Brick::GetNumberOfActiveBricks() != 0)
+	gameWon = Brick::GetNumberOfActiveBricks() == 0;
+
+	if (!gameWon)
 	{
 		if (IsKeyPressed(KEY_P))
 		{
@@ -72,11 +101,25 @@ void Gameplay_Window::HandleMe()
 			ball->CheckCollisionWithPad(pad);
 			ball->CheckCollisionWithBricks(bricks);
 		}
+	
+		if (IsKeyDown(KEY_ESCAPE))
+		{
+			toMenu();
+			pause = true;
+		}
 	}
-
-	if (IsKeyDown(KEY_ESCAPE))
+	else
 	{
-		toMenu();
-		pause = true;
+		if (!pause)
+		{
+			pause = true;
+			EnableCursor();
+		}
+
+		gameWonPanel->DrawMe();
+		if (gameWonPanel->CheckIfClicked())
+		{
+			pause = false;
+		}
 	}
 }

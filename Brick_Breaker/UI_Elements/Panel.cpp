@@ -23,6 +23,8 @@ Panel::~Panel()
 
 void Panel::DrawMe()
 {
+	Rect_Object::DrawMe();
+
 	for (auto button : buttons)
 	{
 		button->DrawMe();

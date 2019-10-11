@@ -21,13 +21,26 @@ void sleep()
 
 void initGameWindows()
 {
-	auto toGame = [] { active = gameplay; DisableCursor(); };
-	auto toMenu = [] {active = menu; EnableCursor(); };
+	auto toGame = [] 
+	{
+		if (gameplay != nullptr)
+		{
+			delete gameplay;
+		}
+
+		auto returnToMenu = [] {active = menu; EnableCursor(); };
+
+		gameplay = new Gameplay_Window(returnToMenu);
+
+		active = gameplay; 
+		DisableCursor(); 
+	};
+
 	auto quitGame = [] {quit = true; };
+	auto restart = [] {};
 	auto resume = [] {};
 
-	gameplay = new Gameplay_Window(toMenu);
-	menu = new Menu_Window(toGame, toMenu, resume, quitGame);
+	menu = new Menu_Window(toGame, restart, resume, quitGame);
 }
 
 void free()

@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Pad.h"
 #include "Ball.h"
+#include "Panel.h"
 #include "TypeFuncPointer.h"
 #include "raylib.h"
 
@@ -21,6 +22,9 @@ class Gameplay_Window : public Window
 		std::vector<Brick*> bricks;
 
 		bool pause;
+		bool gameWon;
+
+		Panel *gameWonPanel;
 
 	public:
 		Gameplay_Window();
