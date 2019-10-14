@@ -65,6 +65,8 @@ int main()
 
 		ClearBackground(RAYWHITE);
 
+		DrawFPS(50, 10);
+
 		active->DrawMe();
 		active->HandleMe();
 		
