@@ -22,7 +22,8 @@ class Menu_Window : public Window
 
 	public:
 		Menu_Window();
-		Menu_Window(Function_Pointer playFunction, Function_Pointer resumeFunction, Function_Pointer restartFunction, Function_Pointer quitFunction);
+		Menu_Window(Function_Pointer playFunction, Function_Pointer resumeFunction, Function_Pointer restartFunction, 
+			Function_Pointer quitFunction);
 
 		~Menu_Window();
 

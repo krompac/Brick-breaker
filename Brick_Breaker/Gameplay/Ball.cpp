@@ -116,23 +116,20 @@ bool Ball::CheckColisionWithRect(Rectangle rect)
 				std::cout << "DESNO" << std::endl;
 			}
 		}
-		else
+		else if (x >= rect.x && x <= rect.x + rect.width)
 		{
-			if (x >= rect.x && x <= rect.x + rect.width)
+			if (!goingUp && center.y + radius >= rect.y && center.y + radius < rect.y + rect.height)
 			{
-				if (!goingUp && center.y + radius >= rect.y && center.y + radius < rect.y + rect.height)
-				{
-					std::cout << "GORE" << std::endl;
-					goingUp = true;
-				}
-				else if (goingUp && center.y - radius <= rect.y + rect.height)
-				{
-					std::cout << "DOLE" << std::endl;
-					goingUp = false;
-				}
+				std::cout << "GORE" << std::endl;
+				goingUp = true;
+			}
+			else if (goingUp && center.y - radius <= rect.y + rect.height)
+			{
+				std::cout << "DOLE" << std::endl;
+				goingUp = false;
 			}
 		}
-
+		
 		directionChanged = true;
 	}
 

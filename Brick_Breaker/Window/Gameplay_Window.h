@@ -7,6 +7,7 @@
 #include "Panel.h"
 #include "TypeFuncPointer.h"
 #include "raylib.h"
+#include "Side.h"
 
 class Gameplay_Window : public Window
 {
@@ -20,11 +21,14 @@ class Gameplay_Window : public Window
 		Ball *ball;
 
 		std::vector<Brick*> bricks;
+		std::vector<Brick*> breakableBricks;
 
 		bool pause;
 		bool gameWon;
 
 		Panel *gameWonPanel;
+
+		void AddBreakableBrick();
 
 	public:
 		Gameplay_Window();

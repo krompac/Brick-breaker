@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base classes\TypeFuncPointer.h" />
+    <ClInclude Include="Enums\Side.h" />
     <ClInclude Include="UI_Elements\Panel.h" />
     <ClInclude Include="UI_Elements\Picture.h" />
     <ClInclude Include="UI_Elements\Button.h" />

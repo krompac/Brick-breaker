@@ -116,6 +116,9 @@
     <ClInclude Include="UI_Elements\Panel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Enums\Side.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="raylib.dll" />

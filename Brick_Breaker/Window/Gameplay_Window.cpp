@@ -7,21 +7,46 @@ Gameplay_Window::Gameplay_Window()
 
 	pad = new Pad(0, 430, 100, 20, BLACK);
 	ball = new Ball(707, 40, 5, ORANGE);
+	
+	int brickNumber = 48;
 
-	int xPos = 75;
-	int yPos = 30;
-	int diff = 52;
-	int brickNumber = 4;
+	int bricksInRow = 12;
+	int bricksInColumn = brickNumber / bricksInRow;
 
-	for (int i = 0; i < brickNumber; i++)
+	int brickWidth = 51;
+	int brickHeigth = 25;
+
+	int xDiff = brickWidth + 1;
+	int yDiff = brickHeigth + 1;
+
+	int startingXpos = 75;
+	int startingYpos = 30;
+
+	int xPos = startingXpos;
+	int yPos = startingYpos;
+
+	for (int i = 0; i < bricksInRow; i++)
 	{
-		bricks.push_back(new Brick(xPos, yPos, 51, 25, BLACK));
-		xPos += diff;
-
-		if (bricks.size() % 12 == 0)
+		if (bricksInColumn)
 		{
-			xPos = 75;
-			yPos += 26;
+			for (int j = 0; j < bricksInColumn; j++)
+			{
+				bricks.push_back(new Brick(xPos, yPos, brickWidth, brickHeigth, BLACK));
+				yPos += yDiff;
+
+				if (i == 0 || i == bricksInRow - 1 || j == 0 || j == bricksInColumn - 1) {
+					AddBreakableBrick();
+				}
+			}
+
+			xPos += xDiff;
+			yPos = startingYpos;
+		}
+		else
+		{
+			bricks.push_back(new Brick(xPos, yPos, brickWidth, brickHeigth, BLACK));
+			AddBreakableBrick();
+			xPos += xDiff;
 		}
 	}
 
@@ -79,6 +104,13 @@ Gameplay_Window::~Gameplay_Window()
 	delete gameWonPanel;
 }
 
+void Gameplay_Window::AddBreakableBrick()
+{
+	auto brick = bricks.back();
+	brick->SetColor(GREEN);
+	breakableBricks.push_back(brick);
+}
+
 void Gameplay_Window::DrawMe()
 {
 	DrawRectangle(0, 0, 50, SCREEN_HEIGTH, GRAY);
@@ -109,7 +141,7 @@ void Gameplay_Window::HandleMe()
 			pause = !pause;
 		}
 
-		if (pause == false)
+		if (!pause)
 		{
 			pad->Move();
 			ball->Move();
