@@ -154,7 +154,7 @@ void Ball::CheckCollisionWithPad(Pad *pad)
 {
 	auto rect = *(pad->getRect());
 
-	if (CheckCollisionCircleRec(center, radius, rect))
+	if (!goingUp && CheckCollisionCircleRec(center, radius, rect))
 	{
 		float rectCenter = rect.x + (rect.width / 2);
 
@@ -172,21 +172,45 @@ void Ball::CheckCollisionWithPad(Pad *pad)
 	}
 }
 
-void Ball::CheckCollisionWithBricks(std::vector<Brick*>& rects)
+void Ball::CheckCollisionWithBricks(std::vector<Brick*>& bricks)
 {
-	auto destroyCounter = 0;
-	directionChanged = false;
-	for (int i = 0; i < rects.size(); i++)
+	auto includes = [](std::vector<Brick*>& bricksToCheck, Brick* brickToFind)
 	{
-		if (!rects[i]->IsDisabled() && CheckColisionWithRect(*(rects[i]->getRect())))
+		bool returnMe = false;
+
+		for (auto brick : bricksToCheck)
 		{
-			rects[i]->DisableMe();
-			destroyCounter++;
+			if (*brick == *brickToFind)
+			{
+				returnMe = true;
+				break;
+			}
+		}
+
+		return returnMe;
+	};
+
+	directionChanged = false;
+	for (int i = 0; i < bricks.size(); i++)
+	{
+		if (!bricks[i]->IsDisabled() && CheckColisionWithRect(*(bricks[i]->getRect())))
+		{
+			auto neighbourBricks = bricks[i]->GetNeighbourBreakableBricks();
+
+			for (auto brick : neighbourBricks)
+			{
+				brick->SetColor(GREEN);
+
+				if (!includes(bricks, brick))
+				{
+					bricks.push_back(brick);
+				}
+			}
+
+			/*bricks[i]->DisableMe();
+			destroyCounter*/
 		}
 	}
-
-	if (destroyCounter > 0)
-	std::cout << "DESTROY COUNTER: " << destroyCounter << std::endl;
 }
 
 Ball::~Ball()

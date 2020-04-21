@@ -50,6 +50,38 @@ Gameplay_Window::Gameplay_Window()
 		}
 	}
 
+	auto connectNeighbourBricks = [](Brick* firstBrick, Brick* secondBrick, Side side)
+	{
+		auto areNeighbours = [](Brick* firstBrick, Brick* secondBrick)
+		{
+			auto firstRect = firstBrick->getRect();
+			auto secondRect = secondBrick->getRect();
+
+			return firstRect->x == secondRect->x || firstRect->y == secondRect->y;
+		};
+
+		Side otherSide = side == LEFT ? RIGHT : UP;
+
+		if (areNeighbours(firstBrick, secondBrick))
+		{
+			firstBrick->SetBrick(side, secondBrick);
+			secondBrick->SetBrick(otherSide, firstBrick);
+		}
+	};
+
+	for (int i = 0; i < bricks.size(); i++)
+	{
+		if (i != 0)
+		{
+			connectNeighbourBricks(bricks[i], bricks[i - 1], LEFT);
+		}
+
+		if (i + bricksInRow < bricks.size())
+		{
+			connectNeighbourBricks(bricks[i], bricks[i + bricksInRow], DOWN);
+		}
+	}
+
 	int panelWidth = 300;
 	int panelHeigth = 200;
 	int panelXpos = (SCREEN_WIDTH - panelWidth) / 2;
@@ -147,7 +179,7 @@ void Gameplay_Window::HandleMe()
 			ball->Move();
 
 			ball->CheckCollisionWithPad(pad);
-			ball->CheckCollisionWithBricks(bricks);
+			ball->CheckCollisionWithBricks(breakableBricks);
 		}
 	
 		if (IsKeyDown(KEY_ESCAPE))

@@ -2,8 +2,8 @@
 
 enum Side
 {
-	Up,
-	Right,
-	Down,
-	Left
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT
 };
