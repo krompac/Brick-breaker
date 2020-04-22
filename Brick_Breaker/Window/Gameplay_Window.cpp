@@ -24,6 +24,7 @@ Gameplay_Window::Gameplay_Window()
 
 	int xPos = startingXpos;
 	int yPos = startingYpos;
+	int id = 1;
 
 	for (int i = 0; i < bricksInRow; i++)
 	{
@@ -31,7 +32,7 @@ Gameplay_Window::Gameplay_Window()
 		{
 			for (int j = 0; j < bricksInColumn; j++)
 			{
-				bricks.push_back(new Brick(xPos, yPos, brickWidth, brickHeigth, BLACK));
+				bricks.push_back(new Brick(xPos, yPos, brickWidth, brickHeigth, BLACK, id++));
 				yPos += yDiff;
 
 				if (i == 0 || i == bricksInRow - 1 || j == 0 || j == bricksInColumn - 1) {
@@ -44,7 +45,7 @@ Gameplay_Window::Gameplay_Window()
 		}
 		else
 		{
-			bricks.push_back(new Brick(xPos, yPos, brickWidth, brickHeigth, BLACK));
+			bricks.push_back(new Brick(xPos, yPos, brickWidth, brickHeigth, BLACK, id++));
 			AddBreakableBrick();
 			xPos += xDiff;
 		}
@@ -71,14 +72,14 @@ Gameplay_Window::Gameplay_Window()
 
 	for (int i = 0; i < bricks.size(); i++)
 	{
-		if (i != 0)
+		if (i - bricksInColumn >= 0)
 		{
-			connectNeighbourBricks(bricks[i], bricks[i - 1], LEFT);
+			connectNeighbourBricks(bricks[i], bricks[i - bricksInColumn], LEFT);
 		}
 
-		if (i + bricksInRow < bricks.size())
+		if (i + 1 < bricks.size())
 		{
-			connectNeighbourBricks(bricks[i], bricks[i + bricksInRow], DOWN);
+			connectNeighbourBricks(bricks[i], bricks[i + 1], DOWN);
 		}
 	}
 
@@ -139,7 +140,7 @@ Gameplay_Window::~Gameplay_Window()
 void Gameplay_Window::AddBreakableBrick()
 {
 	auto brick = bricks.back();
-	brick->SetColor(GREEN);
+	brick->SetColor(LIGHTGRAY);
 	breakableBricks.push_back(brick);
 }
 

@@ -2,15 +2,23 @@
 
 bool Brick::checkNeighbour(Brick * brick)
 {
-	return brick || brick->IsDisabled();;
+	if (!brick)
+	{
+		return true;
+	}
+	else
+	{
+		return brick->IsDisabled();
+	}
 }
 
 Brick::Brick()
 {
 }
 
-Brick::Brick(int x, int y, int width, int height, Color color) : Rect_Object(x, y, width, height, color)
+Brick::Brick(int x, int y, int width, int height, Color color, int id) : Rect_Object(x, y, width, height, color)
 {
+	this->id = std::to_string(id);
 	upperBrick = nullptr;
 	rightBrick = nullptr;
 	lowerBrick = nullptr;

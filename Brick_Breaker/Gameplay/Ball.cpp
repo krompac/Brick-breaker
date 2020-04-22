@@ -195,11 +195,12 @@ void Ball::CheckCollisionWithBricks(std::vector<Brick*>& bricks)
 	{
 		if (!bricks[i]->IsDisabled() && CheckColisionWithRect(*(bricks[i]->getRect())))
 		{
+			bricks[i]->DisableMe();
 			auto neighbourBricks = bricks[i]->GetNeighbourBreakableBricks();
 
 			for (auto brick : neighbourBricks)
 			{
-				brick->SetColor(GREEN);
+				brick->SetColor(LIGHTGRAY);
 
 				if (!includes(bricks, brick))
 				{

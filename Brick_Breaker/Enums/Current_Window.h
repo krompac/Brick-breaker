@@ -2,8 +2,8 @@
 
 enum Current_Window
 {
-	Lobby,
-	Gameplay,
-	Paused,
-	Quit
+	LOBBY,
+	GAMEPLAY,
+	PAUSED,
+	QUIT
 };

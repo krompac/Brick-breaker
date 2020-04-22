@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 #include "Rect_Object.h"
 #include "Side.h"
@@ -18,13 +19,12 @@ class Brick : public Rect_Object
 
 	public:
 		Brick();
-		Brick(int x, int y, int width, int height, Color color);
+		Brick(int x, int y, int width, int height, Color color, int id);
 
 		bool IsDisabled();
 		bool IsBreakable();
 
 		void DisableMe();
-
 		std::vector<Brick*> GetNeighbourBreakableBricks();
 
 		void SetBrick(Side side, Brick *brick);
