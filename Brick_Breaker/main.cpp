@@ -1,6 +1,5 @@
 #include <iostream>
 #include <thread>
-#include <chrono>
 
 #include "raylib.h"
 #include "Gameplay_Window.h"
@@ -13,11 +12,6 @@ Gameplay_Window *gameplay = nullptr;
 Menu_Window *menu = nullptr;
 
 bool quit = false;
-
-void sleep()
-{
-	std::this_thread::sleep_for(std::chrono::milliseconds(15));
-}
 
 void initGameWindows()
 {
@@ -65,14 +59,14 @@ int main()
 
 		ClearBackground(RAYWHITE);
 
+		SetTargetFPS(60);
+
 		DrawFPS(50, 10);
 
 		active->DrawMe();
 		active->HandleMe();
 		
 		EndDrawing();
-
-		sleep();
 	}
 
 	CloseWindow();

@@ -15,6 +15,8 @@ class Brick : public Rect_Object
 		Brick *leftBrick;
 		Brick *rightBrick;
 
+		std::string id;
+
 		bool checkNeighbour(Brick *brick);
 
 	public:
